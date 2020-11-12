@@ -14,10 +14,13 @@ function preload()
 function setup() {
 	createCanvas(800, 700);
 	rectMode(CENTER);
+	var engine = Engine.create();
+    var world = engine.world;
+
 	
 
 	packageSprite=createSprite(width/2, 80, 10,10);
-	//packageSprite.addImage(packageIMG)
+	packageSprite.addImage(packageIMG)
 	packageSprite.scale=0.2
 
 	helicopterSprite=createSprite(width/2, 200, 10,10);
@@ -31,8 +34,9 @@ function setup() {
 	engine = Engine.create();
 	world = engine.world;
 
-	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:3, isStatic:true});
+	packageBody = Bodies.circle(width/2 , 200 , 5 , {restitution:0.6, isStatic:false});
 	World.add(world, packageBody);
+	
 	
 
 	//Create a Ground
@@ -46,10 +50,9 @@ function setup() {
 
 
 function draw() {
-  rectMode(CENTER);
+
   background(0);
-  packageSprite.x= packageBody.position.x 
-  packageSprite.y= packageBody.position.y 
+  keyPressed();
   drawSprites();
  
 }
@@ -57,7 +60,8 @@ function draw() {
 function keyPressed() {
  if (keyCode === DOWN_ARROW) {
     // Look at the hints in the document and understand how to make the package body fall only on
-    
+	packageSprite.x=packageBody.position.x;
+	packageSprite.y=packageBody.position.y;
   }
 }
 
